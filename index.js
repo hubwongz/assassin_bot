@@ -45,21 +45,22 @@ client.on("ready", async () => {
       if (query) {
         query += ");";
         db.run(query).then(async () => {
-          let sql = `SELECT username FROM users`;
+          let sql = `SELECT user_id FROM users`;
           users = await db.all(sql);
-          const sql_users = users.map((member) => member.username);
-          sql = `INSERT INTO users (username, score) VALUES (?, 0)`;
+          const sql_users = users.map((member) => member.user_id);
+          sql = `INSERT INTO users (user_id, nickname, score) VALUES (?, ?, 0)`;
           const textchannel = client.channels.cache.get("1037090477553500293");
-          const memberArray = textchannel.members.map((member) =>
-            member.nickname ? member.nickname : member.user.username
-          );
-          for (let username of memberArray) {
+          const memberArray = textchannel.members.map((member) => member);
+          for (let member of memberArray) {
             if (
-              !sql_users.includes(username) &&
-              username != "Assassin" &&
-              username != "AIV (server manager)"
+              !sql_users.includes(member.user.id) &&
+              member.user.id != "1037077409817694248" &&
+              member.user.id != "1011867184118644797"
             ) {
-              await db.get(sql, [username]);
+              await db.get(sql, [
+                member.user.id,
+                member.nickname ? member.nickname : member.user.id,
+              ]);
             }
           }
           console.log("Database ready!");

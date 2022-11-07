@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS users(
-    username TEXT PRIMARY KEY,
+    user_id TEXT PRIMARY KEY,
+    nickname TEXT NOT NULL,
     score INTEGER
 );

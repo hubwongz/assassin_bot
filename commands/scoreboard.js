@@ -20,8 +20,8 @@ module.exports = {
     description += "--------------------------\n";
 
     for (let agent of scores) {
-      description += `${agent["username"]}`;
-      for (let i = agent["username"].length; i < 21; i++) {
+      description += `${agent["nickname"]}`;
+      for (let i = agent["nickname"].length; i < 21; i++) {
         description += " ";
       }
       description += `${agent["score"]}\n`;
