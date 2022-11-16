@@ -32,7 +32,7 @@ module.exports = {
     // gets the scores from all the killer and killed. updates accordingly
     // killer +2 and killed -1
 
-    sql = `SELECT nickname, score FROM users WHERE user_id = ?`;
+    sql = `SELECT * FROM users WHERE user_id = ?`;
     killed_score = await db.get(sql, [killed]);
     killed_score["score"] -= 1;
     killer_score = await db.get(sql, [killer]);
@@ -41,7 +41,7 @@ module.exports = {
     await db.run(sql, [killer_score["score"], killer]);
     await db.run(sql, [killed_score["score"], killed]);
     await interaction.reply(
-      `You have successfully reported you killed **${killed_score["nickname"]}**. You now have ${killer_score["score"]} points. Watch your back, agent.`
+      `You have successfully reported you killed <@!${killed_score["user_id"]}>. You now have ${killer_score["score"]} points. Watch your back, agent.`
     );
   },
 };
