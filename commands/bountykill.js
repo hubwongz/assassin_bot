@@ -36,7 +36,7 @@ module.exports = {
       await db.run(sql, [killer_score["score"], killer]);
       await db.run(sql, [killed_score["score"], killed]);
       await interaction.reply(
-        `Bounty on **${killed}** has been collected by **${killer}**. **${killer}**, you now have ${killed_score["score"]} points. You might be the next bounty. Watch your back.`
+        `Bounty on **${killed_score["nickname"]}** has been collected by **${killer_score["nickname"]}**. **${killer_score["nickname"]}**, you now have ${killed_score["score"]} points. You might be the next bounty. Watch your back.`
       );
     }
     else {
